@@ -1,5 +1,6 @@
 # 마이크로 프로세서 공학
-2022년 2학기 마이크로 프로세서 공학 수업 관련 코드입니다.
+2022년 2학기 마이크로 프로세서 공학 수업 관련 코드입니다. 깃 허브에 올라온 내용은 모두 개인 참고용으로 올린 내용입니다. 저작권 문제 때문에 추후에 사진을 교체할 예정입니다.
+
 ## 프로젝트 설명
 
 ## 하드웨어
@@ -28,4 +29,4 @@
 출처 : https://blog.naver.com/indifrog21/222328851497
 1. VScode를 받아줍니다. [vscode download](https://code.visualstudio.com/)
 2. 확장 모듈에서 platformIO IDE 를 검색하고 받아줍니다.
-3. ![모듈 검색 이미지]()
+3. ![모듈 검색 이미지](https://github.com/uichan8/esp32_MicroProcesser2022_2/blob/main/images/vscode.png)  
