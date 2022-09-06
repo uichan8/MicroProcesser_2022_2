@@ -25,3 +25,7 @@
 ![설치 이미지](https://github.com/uichan8/esp32_MicroProcesser2022_2/blob/main/images/CP2102%EC%84%A4%EC%B9%98.png)  
 
 ### 마이크로 파이썬
+출처 : https://blog.naver.com/indifrog21/222328851497
+1. VScode를 받아줍니다. [vscode download](https://code.visualstudio.com/)
+2. 확장 모듈에서 platformIO IDE 를 검색하고 받아줍니다.
+3. ![모듈 검색 이미지]()
