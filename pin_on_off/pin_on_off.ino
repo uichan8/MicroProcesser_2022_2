@@ -1,13 +1,13 @@
-int pin = 4;
+//env setup
+int pin  = 25;
 
 void setup() {
-  pinMode(pin,OUTPUT);
-
+ pinMode(pin,OUTPUT);
 }
 
 void loop() {
   digitalWrite(pin,HIGH);
-  delay(900);
+  delay(1000);
   digitalWrite(pin,LOW);
-  delay(100);
+  delay(1000);
 }
