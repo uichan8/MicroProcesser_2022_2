@@ -29,19 +29,25 @@ void loop() {
   while(true){
     Mode_A();
     butten_state = digitalRead(BUTTENPIN);
-    if(past_butten_state == 0 && butten_state == 1) break;
+    if(past_butten_state == 0 && butten_state == 1) {
+      past_butten_state = butten_state;
+      break;
+    }
     past_butten_state = butten_state;
     }
-    delay(200);
+    delay(100);
     Serial.println("Mode_B");
   while(true){
     Mode_B();
     digitalRead(BUTTENPIN);
     butten_state = digitalRead(BUTTENPIN);
-    if(past_butten_state == 0 && butten_state == 1) break;
+    if(past_butten_state == 0 && butten_state == 1) {
+      past_butten_state = butten_state;
+      break;
+    }
     past_butten_state = butten_state;
     }
-    delay(200);
+    delay(100);
 }
 //______________________main_________________________
 
