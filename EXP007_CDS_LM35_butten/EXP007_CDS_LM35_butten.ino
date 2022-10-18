@@ -49,7 +49,7 @@ void loop() {
     }
     delay(100);
 }
-//______________________main_________________________
+//___________________________________________________
 
 //def func
 float ValToTemp(int val){
@@ -72,14 +72,6 @@ void Mode_A(){
     temp_mem = temp;
     past_time = millis();
   }
-
-  //delay
-  
-
-  //debug
-  //Serial.print("temp = ");
-  //Serial.print(temp);
-  //Serial.println("'C");
 }
 
 //CDS 동작하는 친구

@@ -26,7 +26,7 @@ void loop() {
     delay(b_time);
   }
   
-  
+
 }
 
 float check_distance(void){
