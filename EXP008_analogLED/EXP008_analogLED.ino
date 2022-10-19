@@ -14,7 +14,7 @@ void setup() {
 void loop() {
   unsigned int value = analogRead(INPUT_PIN);
   float duty = value/(pow(2,12));              // duty = 가변저항 현재 값 / 가변저항 최댓값
-  int level = pow(2,res)*duty                  // // LED에 써야 하는 값 = PWM_level
+  int level = pow(2,res)*duty                  // LED에 써야 하는 값 = PWM_level
   ledcWrite(PWM_CH,level);     
   Serial.println(level));
 }
