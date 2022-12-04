@@ -1,4 +1,4 @@
-  //--------------------------init--------------------------
+   //--------------------------init--------------------------
 //bluetooth
 #include "BluetoothSerial.h"
 BluetoothSerial SerialBT;
@@ -34,8 +34,15 @@ const int en_2 = 8;
 const int in_4 = 7;          
 
 //line tracker
-const int line_r = 32;
-const int line_l = 33; 
+const int line_1 = 39;
+const int line_2 = 34;
+const int line_3 = 35;
+const int line_4 = 32;
+
+#define LINE_1  GPIO_NUM_39
+#define LINE_2  GPIO_NUM_34
+#define LINE_3  GPIO_NUM_35
+#define LINE_4  GPIO_NUM_32
                                                          
 //--------------------------------------------------------
 
@@ -85,6 +92,11 @@ void setup() {
   digitalWrite(in_3,LOW);
   digitalWrite(in_4,HIGH);
 
+//  digitalWrite(in_1,HIGH);
+//  digitalWrite(in_2,LOW);
+//  digitalWrite(in_3,LOW);
+//  digitalWrite(in_4,HIGH);
+  
   stop_();
    
   strip.SetPixelColor(0, OFF);//오후
@@ -100,6 +112,7 @@ void setup() {
 int butten_state = 0;
 bool led_state = 0;
 bool forced_stop = 0;
+char moter_steate = 's';
 unsigned long past_time = millis();
 unsigned long led_timer = 0;
 RgbColor fr = OFF;
@@ -139,9 +152,10 @@ void loop() {
     stop_();
     light_off();
     hazard_light();
+    line_mode = 0;
   }
   if(forced_stop && !check_distance()){
-  
+    line_mode = 1;
     forced_stop = 0;
     forward();
     }
@@ -154,9 +168,24 @@ void loop() {
     if (rcv_data == 'a') TurnLeft();
     if (rcv_data == 'm') line_mode = abs(line_mode - 1);
    }
-//   if(line_mode){
-//    serial.print();
-//    }
+
+   int bright = 100;
+   if(line_mode){
+    if (analogRead(LINE_1) > bright and analogRead(LINE_2) > bright and analogRead(LINE_3) > bright and analogRead(LINE_4) > bright)forward();
+    else if (analogRead(LINE_1) < bright and analogRead(LINE_2) < bright and analogRead(LINE_3) < bright and analogRead(LINE_4) < bright)forward();
+    else if (analogRead(LINE_2) < bright and analogRead(LINE_3) < bright)forward();
+    else if (analogRead(LINE_1) < bright)TurnLeft();
+    else if (analogRead(LINE_4) < bright)TurnRight();
+    else if (analogRead(LINE_2) < bright){
+      forward();
+      SetWheelSpeed(0.6,0.4);
+    }
+    else if (analogRead(LINE_3) < bright){
+      forward();
+      SetWheelSpeed(0.4,0.6);
+    }
+    else forward();
+    }
     
    past_time = timer;
 }
@@ -183,41 +212,70 @@ bool check_distance(void){
 }
 
 //바퀴 속도 설정
-void SetWheelSpeed(float left, float right){       
+void SetWheelSpeed(float left, float right){
+  if (left > 0){
+    digitalWrite(in_1,HIGH);
+    digitalWrite(in_2,LOW);
+  }   
+  if (right > 0){
+    digitalWrite(in_3,LOW);
+    digitalWrite(in_4,HIGH);
+    }
+  if (left < 0){
+    digitalWrite(in_1,LOW);
+    digitalWrite(in_2,HIGH);
+  }   
+  if (right < 0){
+    digitalWrite(in_3,HIGH);
+    digitalWrite(in_4,LOW);
+    }
+    
   ledcWrite(PWM_CH1,pow(2,res)*left);
   ledcWrite(PWM_CH2,pow(2,res)*right);
   }
   
 //우선회
 void TurnRight(){
-  light_off();
-  SetWheelSpeed(0.8,0.8);
-  delay(10);
-  SetWheelSpeed(0.8,0.4);
-  fr = YELLOW;
-  br = YELLOW;
+  if(moter_steate != 'r'){
+    moter_steate = 'r';;
+    SetWheelSpeed(0.0,0.55);
+    fr = YELLOW;
+    br = YELLOW;
   }
+}
   
 //좌선회
 void TurnLeft(){
-  light_off();
-  SetWheelSpeed(0.8,0.8);
-  delay(10);
-  SetWheelSpeed(0.4,0.8);
-  fl = YELLOW;
-  bl = YELLOW;
+  if(moter_steate != 'l'){
+    moter_steate = 'l';
+    light_off();
+    SetWheelSpeed(0.55,0.0);
+    fl = YELLOW;
+    bl = YELLOW;
+  }
   }
   
 //직진
 void forward(){
-  SetWheelSpeed(0.7,0.7);
-  light_off();
+  if(moter_steate != 'f'){
+    moter_steate = 'f';
+    digitalWrite(in_1,HIGH);
+    digitalWrite(in_2,LOW);
+    digitalWrite(in_3,LOW);
+    digitalWrite(in_4,HIGH);
+    SetWheelSpeed(0.5,0.5);
+    
+    light_off();
+  }
   }
   
 //정지
 void stop_(){
-  SetWheelSpeed(0,0);
+  if(moter_steate != 's'){
+    moter_steate = 's';
+    SetWheelSpeed(0,0);
   }
+}
 
 //비상등
 void hazard_light(){
