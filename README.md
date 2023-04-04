@@ -1,7 +1,8 @@
 # 마이크로 프로세서 공학
-2022년 2학기 마이크로 프로세서 공학 수업 관련 코드입니다. 깃 허브에 올라온 내용은 모두 개인 참고용으로 올린 내용입니다. 저작권 문제 때문에 추후에 사진을 교체할 예정입니다.
+2022년 2학기 마이크로 프로세서 공학 수업 관련 코드입니다. 기본적인 예제와 기말 프로젝트로 구성되어있습니다.
 
 ## 프로젝트 설명
+esp32 마이크로세서로 구동되는 차량을 만들고, 흰색 선을 따라서 갈 수 있는 라인트레이서를 구현합니다. 수동 모드로 전환시 휴대폰 조작을통하여 원하는 방향으로 이동합니다.
 
 ## 하드웨어
 - ESP32-PICO-V3  [제품 링크](https://www.indifrog.co.kr/product/ifzero-board-lite-%EC%95%84%EB%91%90%EC%9D%B4%EB%85%B8-%ED%98%B8%ED%99%98-%EB%B8%94%EB%A3%A8%ED%88%AC%EC%8A%A4-%EC%99%80%EC%9D%B4%ED%8C%8C%EC%9D%B4-%EB%AA%A8%EB%93%88-%EB%B3%B4%EB%93%9C-%EC%95%84%EB%91%90%EC%9D%B4%EB%85%B8cc%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%ED%8C%8C%EC%9D%B4%EC%8D%AC/107/category/49/display/1/)
@@ -25,8 +26,4 @@
 7. CP2102 드라이버를 다운받고, 압축을 풀고, 설치합니다. [CP 드라이버 다운로드 링크](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads)
 ![설치 이미지](https://github.com/uichan8/esp32_MicroProcesser2022_2/blob/main/images/CP2102%EC%84%A4%EC%B9%98.png)  
 
-### 마이크로 파이썬
-출처 : https://blog.naver.com/indifrog21/222328851497
-1. VScode를 받아줍니다. [vscode download](https://code.visualstudio.com/)
-2. 확장 모듈에서 platformIO IDE 를 검색하고 받아줍니다.
-3. ![모듈 검색 이미지](https://github.com/uichan8/esp32_MicroProcesser2022_2/blob/main/images/vscode.png)  
+
